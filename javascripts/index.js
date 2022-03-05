@@ -4,17 +4,28 @@
 
 /** Node Getters **/
 const mainDiv = () => document.getElementById('main');
-const homelink = () => document.getElementById('home-link');
-
+const homeLink = () => document.getElementById('home-link');
+const createPostLink = () => document.getElementById('create-post-link');
+const discussionsLink = () => document.getElementById('discussions-link');
 
 /** Event Listeners **/
 const attachHomePageLinkEvent = () => {
-    homelink().addEventListener('click', loadhome );
+    homeLink().addEventListener('click', loadhome );
 }
 
+const attachCreatePostLinkEvent = () => {
+    createPostLink().addEventListener('click', loadCreatePost);
+}
+
+const attachDiscussionsLinkEvent = () => {
+    discussionsLink().addEventListener('click', loadDiscussions);
+}
 
 /** Event Handlers **/
-const loadhome = () => {
+const loadhome = event => {
+    if(event) {
+        event.preventDefault();
+    }
     resetMainDiv();
     const h1 = document.createElement('h1')
     const p = document.createElement('p')
@@ -29,6 +40,23 @@ const loadhome = () => {
     mainDiv().appendChild(p);
 }
 
+const loadCreatePost = event => {
+    event.preventDefault();
+    resetMainDiv();
+    const h1 = document.createElement('h1');
+    h1.innerText = 'Create Post';
+
+    mainDiv().appendChild(h1);
+}
+
+const loadDiscussions = event => {
+    event.preventDefault();
+    resetMainDiv();
+    const h1 = document.createElement('h1');
+    h1.innerText = 'Discussions';
+
+    mainDiv().appendChild(h1);
+}
 
 /** MISC **/
 const resetMainDiv = () => {
@@ -41,4 +69,6 @@ const resetMainDiv = () => {
 document.addEventListener('DOMContentLoaded', function(){
     loadhome();
     attachHomePageLinkEvent();
+    attachCreatePostLinkEvent();
+    attachDiscussionsLinkEvent();
 })
