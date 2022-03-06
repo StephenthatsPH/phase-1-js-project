@@ -1,0 +1,19 @@
+{
+    "posts": [
+        {
+            "id": 1,
+            "Username": "User1",
+            "post": "Look I made a post."
+        },
+        {
+            "id": 2,
+            "Username": "User69",
+            "post": "My name is Chad."
+        },
+        {
+            "id": 3,
+            "Username": "User420",
+            "post": "LUL get a load of that guy."
+        }
+    ]
+}

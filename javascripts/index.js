@@ -7,6 +7,7 @@ const mainDiv = () => document.getElementById('main');
 const homeLink = () => document.getElementById('home-link');
 const createPostLink = () => document.getElementById('create-post-link');
 const discussionsLink = () => document.getElementById('discussions-link');
+const versusLink = () => document.getElementById("name-logo");
 
 /** Event Listeners **/
 const attachHomePageLinkEvent = () => {
@@ -113,6 +114,9 @@ const resetMainDiv = () => {
     mainDiv().innerHTML = '';
 }
 
+versusLink().addEventListener('click', function() {
+    alert('Keep touching me and we will 1v1!');
+});
 
 /** Startup **/
 
