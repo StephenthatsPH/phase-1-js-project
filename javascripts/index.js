@@ -7,6 +7,7 @@ const mainDiv = () => document.getElementById('main');
 const homeLink = () => document.getElementById('home-link');
 const createPostLink = () => document.getElementById('create-post-link');
 const discussionsLink = () => document.getElementById('discussions-link');
+const loginLink = () => document.getElementById('login-link');
 const versusLink = () => document.getElementById("name-logo");
 
 /** Event Listeners **/
@@ -20,6 +21,10 @@ const attachCreatePostLinkEvent = () => {
 
 const attachDiscussionsLinkEvent = () => {
     discussionsLink().addEventListener('click', loadDiscussions);
+}
+
+const attachLoginLink = () => {
+    loginLink().addEventListener('click',loadLogin);
 }
 
 /** Event Handlers **/
@@ -109,6 +114,15 @@ const loadDiscussions = event => {
     mainDiv().appendChild(h1);
 }
 
+const loadLogin = event => {
+    event.preventDefault();
+    resetMainDiv();
+    const h1 = document.createElement('h1');
+    h1.innerText = 'Login';
+
+    mainDiv().appendChild(h1);
+}
+
 /** MISC **/
 const resetMainDiv = () => {
     mainDiv().innerHTML = '';
@@ -125,4 +139,9 @@ document.addEventListener('DOMContentLoaded', function(){
     attachHomePageLinkEvent();
     attachCreatePostLinkEvent();
     attachDiscussionsLinkEvent();
+    attachLoginLink();
 })
+
+
+
+
