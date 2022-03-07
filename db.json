@@ -1,19 +1,25 @@
 {
+    "users": [
+        {
+            "username": "YaaBoiSpork",
+            "password": "Justfortesting",
+            "email": "sanerby@outlook.com",
+            "id": 1
+        }
+    ],
     "posts": [
         {
-            "id": 1,
-            "Username": "User1",
-            "post": "Look I made a post."
-        },
+            "username": "YaaBoiSpork",
+            "title": "My first post!",
+            "tags": "",
+            "text": "This is my first post and the first for this site.",
+            "id": 1
+        }
+    ],
+    "videos": [
         {
-            "id": 2,
-            "Username": "User69",
-            "post": "My name is Chad."
-        },
-        {
-            "id": 3,
-            "Username": "User420",
-            "post": "LUL get a load of that guy."
+            "url": "https://www.youtube.com/watch?v=tUm59wEVCWw"
         }
     ]
 }
+

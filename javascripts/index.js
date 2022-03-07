@@ -6,7 +6,7 @@
 const mainDiv = () => document.getElementById('main');
 const homeLink = () => document.getElementById('home-link');
 const createPostLink = () => document.getElementById('create-post-link');
-const discussionsLink = () => document.getElementById('discussions-link');
+const postsLink = () => document.getElementById('posts-link');
 const loginLink = () => document.getElementById('login-link');
 const versusLink = () => document.getElementById('name-logo');
 const createAccountLink = () => document.getElementById('linkCreateAccount');
@@ -21,7 +21,7 @@ const attachCreatePostLinkEvent = () => {
 }
 
 const attachDiscussionsLinkEvent = () => {
-    discussionsLink().addEventListener('click', loadDiscussions);
+    postsLink().addEventListener('click', loadDiscussions);
 }
 
 const attachLoginLink = () => {
@@ -56,7 +56,7 @@ const loadCreatePost = event => {
     const form = document.createElement('form');
     
     const label1 = document.createElement('label');
-    label1.innerText = 'UserName';
+    label1.innerText = 'Username';
     const label2 = document.createElement('label');
     label2.innerText = 'Title';
     const label3 = document.createElement('label');
@@ -68,7 +68,7 @@ const loadCreatePost = event => {
     input1.type = "text";
     input1.id = "Username";
     input1.name = "UserName";
-    input1.placeholder = "UserName";
+    input1.placeholder = "Username";
     input1.required;
     const input2 = document.createElement('input');
     input2.type = "text";
@@ -114,33 +114,6 @@ const loadDiscussions = event => {
     
     mainDiv().appendChild(h1);
 }
-
-// loadLogin goes here
-
-/** MISC **/
-const resetMainDiv = () => {
-    mainDiv().innerHTML = '';
-}
-
-versusLink().addEventListener('click', function() {
-    alert('Keep touching me and we will 1v1!');
-});
-
-/** Startup **/
-
-document.addEventListener('DOMContentLoaded', function(){
-    loadhome();
-    attachHomePageLinkEvent();
-    attachCreatePostLinkEvent();
-    attachDiscussionsLinkEvent();
-    attachLoginLink();
-})
-
-
-
-
-
-
 
 const loadLogin = event => {
 event.preventDefault();
@@ -306,107 +279,83 @@ div14.appendChild(div15);
 form2.appendChild(button2);
 form2.appendChild(p3);
 p3.appendChild(a3);
-}
-    
-    function setFormMessage(formElement, type, message) {
-        const messageElement = formElement.querySelector(".form__message");
-    
-        messageElement.textContent = message;
-        messageElement.classList.remove("form__message--success", "form__message--error");
-        messageElement.classList.add(`form__message--${type}`);
-    }
-    
-    function setInputError(inputElement, message) {
-        inputElement.classList.add("form__input--error");
-        inputElement.parentElement.querySelector(".form__input-error-message").textContent = message;
-    }
-    
-    function clearInputError(inputElement) {
-        inputElement.classList.remove("form__input--error");
-        inputElement.parentElement.querySelector(".form__input-error-message").textContent = "";
-    }
-    
-    document.addEventListener("DOMContentLoaded", () => {
-        const loginForm = document.querySelector("#login");
-        const createAccountForm = document.querySelector("#createAccount");
-        
-        createAccountLink().addEventListener("click", event => {
-            event.preventDefault();
-            loginForm.classList.add("form--hidden");
-            createAccountForm.classList.remove("form--hidden");
-        });
+};
 
-        document.querySelector("#linkLogin").addEventListener("click", e => {
-            e.preventDefault();
-            loginForm.classList.remove("form--hidden");
-            createAccountForm.classList.add("form--hidden");
-        });
-        
-        loginForm.addEventListener("submit", e => {
-            e.preventDefault();
-            
-            // Perform your AJAX/Fetch login
-            
-            setFormMessage(loginForm, "error", "Invalid username/password combination");
-        });
-        
-        document.querySelectorAll(".form__input").forEach(inputElement => {
-            inputElement.addEventListener("blur", e => {
-                if (e.target.id === "signupUsername" && e.target.value.length > 0 && e.target.value.length < 8) {
-                    setInputError(inputElement, "Username must be at least 8 characters in length");
-                }
-            });
-            
-            inputElement.addEventListener("input", e => {
-                clearInputError(inputElement);
-            });
-        });
+/** MISC **/
+const resetMainDiv = () => {
+    mainDiv().innerHTML = '';
+};
+
+versusLink().addEventListener('click', function() {
+    alert('Keep touching me and we will 1v1!');
+});
+
+/** Startup **/
+
+document.addEventListener('DOMContentLoaded', function(){
+    loadhome();
+    attachHomePageLinkEvent();
+    attachCreatePostLinkEvent();
+    attachDiscussionsLinkEvent();
+    attachLoginLink();
+});
+
+
+
+
+/** Fix this later vvvv **/ 
+
+    
+function setFormMessage(formElement, type, message) {
+    const messageElement = formElement.querySelector(".form__message");
+
+    messageElement.textContent = message;
+    messageElement.classList.remove("form__message--success", "form__message--error");
+    messageElement.classList.add(`form__message--${type}`);
+};
+
+function setInputError(inputElement, message) {
+    inputElement.classList.add("form__input--error");
+    inputElement.parentElement.querySelector(".form__input-error-message").textContent = message;
+};
+
+function clearInputError(inputElement) {
+    inputElement.classList.remove("form__input--error");
+    inputElement.parentElement.querySelector(".form__input-error-message").textContent = "";
+};
+    
+    const loginForm = document.querySelector("#login");
+    const createAccountForm = document.querySelector("#createAccount");
+    
+    createAccountLink().addEventListener("click", e => {
+        e.preventDefault();
+        loginForm.classList.add("form--hidden");
+        createAccountForm.classList.remove("form--hidden");
+    });
+    document.querySelector("#linkLogin").addEventListener("click", e => {
+        e.preventDefault();
+        loginForm.classList.remove("form--hidden");
+        createAccountForm.classList.add("form--hidden");
     });
     
-    
+    loginForm.addEventListener("submit", e => {
+        e.preventDefault();
         
-        // <div class="container-login">
-        //     <form class="form" id="login">
-        //         <h1 class="form__title">Login</h1>
-        //         <div class="form__message form__message--error"></div>
-        //         <div class="form__input-group">
-        //             <input type="text" class="form__input" autofocus placeholder="Username or email">
-        //             <div class="form__input-error-message"></div>
-        //         </div>
-        //         <div class="form__input-group">
-    //             <input type="password" class="form__input" autofocus placeholder="Password">
-    //             <div class="form__input-error-message"></div>
-    //         </div>
-    //         <button class="form__button" type="submit">Continue</button>
-    //         <p class="form__text">
-    //             <a href="#" class="form__link">Forgot your password?</a>
-    //         </p>
-    //         <p class="form__text">
-    //             <a class="form__link" href="./" id="linkCreateAccount">Don't have an account? Create account</a>
-    //         </p>
-    //     </form>
-    //     <form class="form form--hidden" id="createAccount">
-    //         <h1 class="form__title">Create Account</h1>
-    //         <div class="form__message form__message--error"></div>
-    //         <div class="form__input-group">
-    //             <input type="text" id="signupUsername" class="form__input" autofocus placeholder="Username">
-    //             <div class="form__input-error-message"></div>
-    //         </div>
-    //         <div class="form__input-group">
-    //             <input type="text" class="form__input" autofocus placeholder="Email Address">
-    //             <div class="form__input-error-message"></div>
-    //         </div>
-    //         <div class="form__input-group">
-    //             <input type="password" class="form__input" autofocus placeholder="Password">
-    //             <div class="form__input-error-message"></div>
-    //         </div>
-    //         <div class="form__input-group">
-    //             <input type="password" class="form__input" autofocus placeholder="Confirm password">
-    //             <div class="form__input-error-message"></div>
-    //         </div>
-    //         <button class="form__button" type="submit">Continue</button>
-    //         <p class="form__text">
-    //             <a class="form__link" href="./" id="linkLogin">Already have an account? Sign in</a>
-    //         </p>
-    //     </form>
-    // </div>
+        // Perform your AJAX/Fetch login
+        
+        setFormMessage(loginForm, "error", "Invalid username/password combination");
+    });
+    
+    document.querySelectorAll(".form__input").forEach(inputElement => {
+        inputElement.addEventListener("blur", e => {
+            if (e.target.id === "signupUsername" && e.target.value.length > 0 && e.target.value.length < 8) {
+                setInputError(inputElement, "Username must be at least 8 characters in length");
+            }
+        });
+        
+        inputElement.addEventListener("input", e => {
+            clearInputError(inputElement);
+        });
+    });
+
+    
