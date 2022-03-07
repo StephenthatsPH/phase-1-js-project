@@ -148,8 +148,10 @@ const loadLogin = event => {
         h1.innerText = 'Login';
     const h1two = document.createElement('h1');
         h1two.className = 'form__title';
-    const h1three = document.createElement('h1');
-        h1two.className = 'form__title';
+        h1two.innerText = 'Login';
+    const h13rd = document.createElement('h1');
+        h13rd.className = 'form__title';
+        h13rd.innerText = 'Create Account';
     
     const div1 = document.createElement('div');
         div1.className = 'container-login';
@@ -223,9 +225,113 @@ const loadLogin = event => {
         button.type = 'submit';
         button.innerText = 'Continue';
 
-     mainDiv().appendChild(h1);
-     mainDiv().appendChild(div1);
+        
+        
+        
+    mainDiv().appendChild(h1);
+    mainDiv().appendChild(div1);
+    
+    div1.appendChild(form1);
+    
+    form1.appendChild(h1two);
+    form1.appendChild(div2);
+    form1.appendChild(div3);
+    
+    div3.appendChild(input1);
+    div3.appendChild(div4);
+
+    form1.appendChild(div3);
+    div3.appendChild(input2);
+    form1.appendChild(button);
+    form1.appendChild(p1);
+    p1.appendChild(a1);
+    form1.appendChild(p1);
+    p1.appendChild(a2);
+//Above is login^^
+//Below is Create account vvv
+    div1.appendChild(form2);
+
+    form2.appendChild(h13rd);
+    form2.appendChild(div2);
+    form2.appendChild(div3);
+
+    div3.appendChild(input3);
+    div3.appendChild(div4);
+
+    form2.appendChild(div3);
+    div3.appendChild(input4);
+    div3.appendChild(div4);
+
+    form2.appendChild(div3);
+    div3.appendChild(input5);
+    div3.appendChild(div4);
+
+    form2.appendChild(div3);
+    div3.appendChild(input6);
+    div3.appendChild(div4);
+
+    form2.appendChild(button);
+    form2.appendChild(p1);
+    p1.appendChild(a3);
     }
+    
+function setFormMessage(formElement, type, message) {
+    const messageElement = formElement.querySelector(".form__message");
+
+    messageElement.textContent = message;
+    messageElement.classList.remove("form__message--success", "form__message--error");
+    messageElement.classList.add(`form__message--${type}`);
+}
+
+function setInputError(inputElement, message) {
+    inputElement.classList.add("form__input--error");
+    inputElement.parentElement.querySelector(".form__input-error-message").textContent = message;
+}
+
+function clearInputError(inputElement) {
+    inputElement.classList.remove("form__input--error");
+    inputElement.parentElement.querySelector(".form__input-error-message").textContent = "";
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+    const loginForm = document.querySelector("#login");
+    const createAccountForm = document.querySelector("#createAccount");
+
+    document.querySelector("#linkCreateAccount").addEventListener("click", e => {
+        e.preventDefault();
+        loginForm.classList.add("form--hidden");
+        createAccountForm.classList.remove("form--hidden");
+    });
+
+    document.querySelector("#linkLogin").addEventListener("click", e => {
+        e.preventDefault();
+        loginForm.classList.remove("form--hidden");
+        createAccountForm.classList.add("form--hidden");
+    });
+
+    loginForm.addEventListener("submit", e => {
+        e.preventDefault();
+
+        // Perform your AJAX/Fetch login
+
+        setFormMessage(loginForm, "error", "Invalid username/password combination");
+    });
+
+    document.querySelectorAll(".form__input").forEach(inputElement => {
+        inputElement.addEventListener("blur", e => {
+            if (e.target.id === "signupUsername" && e.target.value.length > 0 && e.target.value.length < 8) {
+                setInputError(inputElement, "Username must be at least 8 characters in length");
+            }
+        });
+
+        inputElement.addEventListener("input", e => {
+            clearInputError(inputElement);
+        });
+    });
+});
+    
+    
+    
     // <div class="container-login">
     //     <form class="form" id="login">
     //         <h1 class="form__title">Login</h1>
