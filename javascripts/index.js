@@ -1,15 +1,17 @@
 /** Global Variables **/
-
-
+const baseUrl = 'http://localhost:3000';
+let posts = [];
 
 /** Node Getters **/
 const mainDiv = () => document.getElementById('main');
 const homeLink = () => document.getElementById('home-link');
 const createPostLink = () => document.getElementById('create-post-link');
-const postsLink = () => document.getElementById('posts-link');
+const discussionsLink = () => document.getElementById('discussions-link');
 const loginLink = () => document.getElementById('login-link');
 const versusLink = () => document.getElementById('name-logo');
 const createAccountLink = () => document.getElementById('linkCreateAccount');
+
+
 
 /** Event Listeners **/
 const attachHomePageLinkEvent = () => {
@@ -21,7 +23,7 @@ const attachCreatePostLinkEvent = () => {
 }
 
 const attachDiscussionsLinkEvent = () => {
-    postsLink().addEventListener('click', loadDiscussions);
+    discussionsLink().addEventListener('click', loadDiscussions);
 }
 
 const attachLoginLink = () => {
@@ -111,9 +113,22 @@ const loadDiscussions = event => {
     resetMainDiv();
     const h1 = document.createElement('h1');
     h1.innerText = 'Discussions';
+    const div = document.createElement('div');
+    div.className = 'collection';
+    
+    posts.forEach( post => {
+        const a = document.createElement('a');
+        a.className = 'collection-item';
+        a.innerText = post.title;
+        
+        div.appendChild(a);
+    });
     
     mainDiv().appendChild(h1);
-}
+    mainDiv().appendChild(div);
+    
+};
+
 
 const loadLogin = event => {
 event.preventDefault();
@@ -281,6 +296,15 @@ form2.appendChild(p3);
 p3.appendChild(a3);
 };
 
+/** Requests **/
+const loadPosts = () => {
+    fetch(baseUrl + '/posts')
+        .then(resp => resp.json())
+        .then(data => {
+            posts = data;
+        })
+};
+
 /** MISC **/
 const resetMainDiv = () => {
     mainDiv().innerHTML = '';
@@ -293,6 +317,7 @@ versusLink().addEventListener('click', function() {
 /** Startup **/
 
 document.addEventListener('DOMContentLoaded', function(){
+    loadPosts();
     loadhome();
     attachHomePageLinkEvent();
     attachCreatePostLinkEvent();
@@ -306,56 +331,55 @@ document.addEventListener('DOMContentLoaded', function(){
 /** Fix this later vvvv **/ 
 
     
-function setFormMessage(formElement, type, message) {
-    const messageElement = formElement.querySelector(".form__message");
-
-    messageElement.textContent = message;
-    messageElement.classList.remove("form__message--success", "form__message--error");
-    messageElement.classList.add(`form__message--${type}`);
-};
-
-function setInputError(inputElement, message) {
-    inputElement.classList.add("form__input--error");
-    inputElement.parentElement.querySelector(".form__input-error-message").textContent = message;
-};
-
-function clearInputError(inputElement) {
-    inputElement.classList.remove("form__input--error");
-    inputElement.parentElement.querySelector(".form__input-error-message").textContent = "";
-};
-    
-    const loginForm = document.querySelector("#login");
-    const createAccountForm = document.querySelector("#createAccount");
-    
-    createAccountLink().addEventListener("click", e => {
-        e.preventDefault();
-        loginForm.classList.add("form--hidden");
-        createAccountForm.classList.remove("form--hidden");
-    });
-    document.querySelector("#linkLogin").addEventListener("click", e => {
-        e.preventDefault();
-        loginForm.classList.remove("form--hidden");
-        createAccountForm.classList.add("form--hidden");
-    });
-    
-    loginForm.addEventListener("submit", e => {
-        e.preventDefault();
-        
-        // Perform your AJAX/Fetch login
-        
-        setFormMessage(loginForm, "error", "Invalid username/password combination");
-    });
-    
-    document.querySelectorAll(".form__input").forEach(inputElement => {
-        inputElement.addEventListener("blur", e => {
-            if (e.target.id === "signupUsername" && e.target.value.length > 0 && e.target.value.length < 8) {
-                setInputError(inputElement, "Username must be at least 8 characters in length");
-            }
-        });
-        
-        inputElement.addEventListener("input", e => {
-            clearInputError(inputElement);
-        });
-    });
-
+//function setFormMessage(formElement, type, message) {
+//    const messageElement = formElement.querySelector(".form__message");
+//
+//    messageElement.textContent = message;
+//    messageElement.classList.remove("form__message--success", "form__message--error");
+//    messageElement.classList.add(`form__message--${type}`);
+//};
+//
+//function setInputError(inputElement, message) {
+//    inputElement.classList.add("form__input--error");
+//    inputElement.parentElement.querySelector(".form__input-error-message").textContent = message;
+//};
+//
+//function clearInputError(inputElement) {
+//    inputElement.classList.remove("form__input--error");
+//    inputElement.parentElement.querySelector(".form__input-error-message").textContent = "";
+//};
+//    
+//    const loginForm = document.querySelector("#login");
+//    const createAccountForm = document.querySelector("#createAccount");
+//    
+//    createAccountLink().addEventListener("click", e => {
+//        e.preventDefault();
+//        loginForm.classList.add("form--hidden");
+//        createAccountForm.classList.remove("form--hidden");
+//    });
+//    document.querySelector("#linkLogin").addEventListener("click", e => {
+//        e.preventDefault();
+//        loginForm.classList.remove("form--hidden");
+//        createAccountForm.classList.add("form--hidden");
+//    });
+//    
+//    loginForm.addEventListener("submit", e => {
+//        e.preventDefault();
+//        
+//        // Perform your AJAX/Fetch login
+//        
+//        setFormMessage(loginForm, "error", "Invalid username/password combination");
+//    });
+//    
+//    document.querySelectorAll(".form__input").forEach(inputElement => {
+//        inputElement.addEventListener("blur", e => {
+//            if (e.target.id === "signupUsername" && e.target.value.length > 0 && e.target.value.length < 8) {
+//                setInputError(inputElement, "Username must be at least 8 characters in length");
+//            }
+//        });
+//        
+//        inputElement.addEventListener("input", e => {
+//            clearInputError(inputElement);
+//        });
+//    });
     
