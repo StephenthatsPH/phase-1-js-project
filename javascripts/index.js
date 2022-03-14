@@ -12,7 +12,6 @@ const versusLink = () => document.getElementById('name-logo');
 const createAccountLink = () => document.getElementById('linkCreateAccount');
 
 
-
 /** Event Listeners **/
 const attachHomePageLinkEvent = () => {
     homeLink().addEventListener('click', loadhome );
@@ -31,6 +30,13 @@ const attachLoginLink = () => {
 }
 
 /** Event Handlers **/
+
+const sumbitForm = event => {
+    event.preventDefault();
+
+    console.log('This is being clicked')
+};
+
 const loadhome = event => {
     if(event) {
         event.preventDefault();
@@ -83,14 +89,16 @@ const loadCreatePost = event => {
     input3.id = "tags";
     input3.name = "tags";
     input3.placeholder = "Enter Tags (Optional)";
-    const input4 = document.createElement('input');
-    input4.type = "submit";
-    input4.innerText = "Post";
+    const submit = document.createElement('input');
+    submit.type = 'submit';
+    submit.id = 'submit-form';
+    submit.innerText = 'Create Post';
     
     const textarea = document.createElement('textarea');
     textarea.name = "text";
     textarea.id = "postText";
     textarea.placeholder = "Enter Text";
+    
     
     form.appendChild(label1);
     form.appendChild(input1);
@@ -100,12 +108,14 @@ const loadCreatePost = event => {
     form.appendChild(input3);
     form.appendChild(label4);
     form.appendChild(textarea);
-    form.appendChild(input4);
+    form.appendChild(submit);
+    form.addEventListener('submit', sumbitForm);
     
     div.appendChild(form);
     
     mainDiv().appendChild(h1);
     mainDiv().appendChild(div);
+    
 }
 
 const loadDiscussions = event => {
