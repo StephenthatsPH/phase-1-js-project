@@ -10,7 +10,7 @@ const discussionsLink = () => document.getElementById('discussions-link');
 const loginLink = () => document.getElementById('login-link');
 const versusLink = () => document.getElementById('name-logo');
 const createAccountLink = () => document.getElementById('linkCreateAccount');
-const formUserName = () => document.getElementById('userName');
+const formUserName = () => document.getElementById('user-name');
 const formTitle = () => document.getElementById('title');
 const formTags = () => document.getElementById('tags');
 const formPostText = () => document.getElementById('postText');
@@ -36,8 +36,32 @@ const attachLoginLink = () => {
 
 const sumbitForm = event => {
     event.preventDefault();
+//    {
+//        "username": "YaaBoiSpork",
+//        "title": "My first post!",
+//        "tags": "",
+//        "text": "This is my first post and the first for this site.",
+//        "id": 1
+//    }
+    const jsonObject = {
+        username: formUserName().value,
+        title: formTitle().value,
+        tags: formTags().value,
+        text: formPostText().value
+    }
 
-    debugger;
+    fetch(baseUrl + '/posts', {
+        method: "POST",
+        headers: {
+            "Accept": "application/json",
+            "Content-Type": "application/json"
+        },
+        body: JSON.stringify(jsonObject)
+    })
+        .then(resp => resp.json())
+        .then(data => {
+            debugger;
+        })
 };
 
 const loadhome = event => {
@@ -77,7 +101,7 @@ const loadCreatePost = event => {
     
     const input1 = document.createElement('input');
     input1.type = "text";
-    input1.id = "userName";
+    input1.id = "user-name";
     input1.name = "UserName";
     input1.placeholder = "Username";
     input1.required;
