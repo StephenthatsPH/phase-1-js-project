@@ -60,7 +60,8 @@ const sumbitForm = event => {
     })
         .then(resp => resp.json())
         .then(data => {
-            debugger;
+            posts.push(data);
+            loadDiscussions();
         })
 };
 
@@ -146,7 +147,9 @@ const loadCreatePost = event => {
 }
 
 const loadDiscussions = event => {
-    event.preventDefault();
+    if(event) {
+        event.preventDefault();
+    }
     resetMainDiv();
     const h1 = document.createElement('h1');
     h1.innerText = 'Discussions';
