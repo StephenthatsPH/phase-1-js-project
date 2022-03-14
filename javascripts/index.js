@@ -71,15 +71,19 @@ const loadhome = event => {
     }
     resetMainDiv();
     const h1 = document.createElement('h1')
+    const h3 = document.createElement('h3')
     const p = document.createElement('p')
     
     h1.className = 'center-align';
+    h3.className = 'center-align';
     p.className = 'center-align';
     
     h1.innerText = 'Versus';
-    p.innerText = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Animi placeat, optio voluptatem, magni voluptas fuga architecto nesciunt sequi praesentium suscipit nihil dolore hic esse. In iure maxime quos tenetur pariatur!';
+    h3.innerText = 'Welcome to Versus!';
+    p.innerText = 'This is Versus, Versus is a blog/forum site where you can compare videos of any you like against eachother. We are currently working on adding more functionality to the page as time and support goes on.';
     
     mainDiv().appendChild(h1);
+    mainDiv().appendChild(h3);
     mainDiv().appendChild(p);
 }
 
