@@ -34,6 +34,40 @@ const attachLoginLink = () => {
 
 /** Event Handlers **/
 
+const populateModal = event => {
+    event.preventDefault();
+    const post = posts.find(post => event.target.innerText === post.title)
+    postTitleModal().innerText = post.title;
+    postUserNameModal().innerText = post.username;
+    postTagsModal().innerText = post.tags;
+    postTextModal().innerText = post.text;
+
+    const deletePost = event => {
+        // delete fetch
+        fetch(baseUrl + '/posts/' + post.id, {
+            method: "DELETE",
+            headers: {
+                "Accept": "application/json",
+                "Content-type": "application/json"
+            }
+        })
+            .then(resp => resp.json())
+            .then(data => {
+                posts = posts.filter(p => p.id !== post.id);
+                var elems = document.querySelectorAll('.modal');
+                var instances = M.Modal.init(elems);
+                instances[0].close();
+                loadDiscussions();
+            })
+    }
+    modalFooter.innerHTML = ''
+    const button = document.createElement('button');
+    button.innerText = 'Delete'
+    button.className = 'btn'
+    button.addEventListener('click', deletePost);
+    modalFooter().appendChild(button);
+};
+
 const sumbitForm = event => {
     event.preventDefault();
 //    {
@@ -48,7 +82,7 @@ const sumbitForm = event => {
         title: formTitle().value,
         tags: formTags().value,
         text: formPostText().value
-    }
+    };
 
     fetch(baseUrl + '/posts', {
         method: "POST",
@@ -62,7 +96,7 @@ const sumbitForm = event => {
         .then(data => {
             posts.push(data);
             loadDiscussions();
-        })
+        });
 };
 
 const loadhome = event => {
@@ -132,6 +166,7 @@ const loadCreatePost = event => {
     textarea.placeholder = "Enter Text";
     
     
+    
     form.appendChild(label1);
     form.appendChild(input1);
     form.appendChild(label2);
@@ -162,12 +197,15 @@ const loadDiscussions = event => {
     
     posts.forEach( post => {
         const a = document.createElement('a');
-        a.className = 'collection-item';
+        a.setAttribute('href',"#modal1")
+        a.className = 'collection-item modal-trigger';
         a.innerText = post.title;
+        a.addEventListener('click', populateModal);
         
         div.appendChild(a);
     });
-    
+    $('.modal').modal();
+
     mainDiv().appendChild(h1);
     mainDiv().appendChild(div);
     
