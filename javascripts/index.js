@@ -10,7 +10,10 @@ const discussionsLink = () => document.getElementById('discussions-link');
 const loginLink = () => document.getElementById('login-link');
 const versusLink = () => document.getElementById('name-logo');
 const createAccountLink = () => document.getElementById('linkCreateAccount');
-
+const formUserName = () => document.getElementById('userName');
+const formTitle = () => document.getElementById('title');
+const formTags = () => document.getElementById('tags');
+const formPostText = () => document.getElementById('postText');
 
 /** Event Listeners **/
 const attachHomePageLinkEvent = () => {
@@ -34,7 +37,7 @@ const attachLoginLink = () => {
 const sumbitForm = event => {
     event.preventDefault();
 
-    console.log('This is being clicked')
+    debugger;
 };
 
 const loadhome = event => {
@@ -74,7 +77,7 @@ const loadCreatePost = event => {
     
     const input1 = document.createElement('input');
     input1.type = "text";
-    input1.id = "Username";
+    input1.id = "userName";
     input1.name = "UserName";
     input1.placeholder = "Username";
     input1.required;
