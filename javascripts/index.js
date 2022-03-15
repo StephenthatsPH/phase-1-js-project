@@ -67,10 +67,17 @@ const populateModal = event => {
     }
     modalFooter.innerHTML = ''
     const button = document.createElement('button');
-    button.innerText = 'Delete'
-    button.className = 'btn'
-    button.addEventListener('click', deletePost);
-    modalFooter().appendChild(button);
+  const editButton = document.createElement('button');
+  button.innerText = 'Delete'
+  editButton.innerText = 'Edit'
+  button.className = 'btn'
+  editButton.className="btn"
+  editButton.style.marginRight = '10px';
+  button.addEventListener('click', deletePost);
+  editButton.addEventListener('click', () => populateEditForm(post));
+  
+  modalFooter().appendChild(editButton);
+  modalFooter().appendChild(button);
 };
 
 const sumbitForm = event => {
