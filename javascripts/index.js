@@ -131,7 +131,7 @@ const closeModal = () => {
     var elem = document.querySelector('.modal');
     var instance = M.Modal.getInstance(elem);
     instance.close();
-  }
+}
 
 const populateEditForm = (post) => {
   resetMainDiv();
@@ -163,9 +163,7 @@ const updatepost = (post) => {
     })
 }
 
-const loadCreatePost = event => {
-    event.preventDefault();
-    resetMainDiv();
+const loadForm = (headerText, formCallback, post) => {
     const h1 = document.createElement('h1');
     h1.innerText = 'Create Post';
     const div = document.createElement('div');
@@ -197,16 +195,19 @@ const loadCreatePost = event => {
     input3.id = "tags";
     input3.name = "tags";
     input3.placeholder = "Enter Tags (Optional)";
-    const submit = document.createElement('input');
-    submit.type = 'submit';
-    submit.id = 'submit-form';
-    submit.innerText = 'Create Post';
     
     const textarea = document.createElement('textarea');
     textarea.name = "text";
     textarea.id = "postText";
     textarea.placeholder = "Enter Text";
     
+    const submit = document.createElement('input');
+    submit.type = 'submit';
+    submit.id = 'submit-form';
+    submit.innerText = 'Create Post';
+    if(post) {
+        submit.setAttribute('value', 'Update Post');
+      }
     
     
     form.appendChild(label1);
@@ -218,13 +219,24 @@ const loadCreatePost = event => {
     form.appendChild(label4);
     form.appendChild(textarea);
     form.appendChild(submit);
-    form.addEventListener('submit', sumbitForm);
+    form.addEventListener('submit', event => {
+        event.preventDefault();
+        formCallback(post);
+    });
     
     div.appendChild(form);
     
     mainDiv().appendChild(h1);
     mainDiv().appendChild(div);
     
+}
+
+
+const loadCreatePost = event => {
+    event.preventDefault();
+    resetMainDiv();
+    
+    loadForm('Create Post', sumbitForm)
 }
 
 const loadDiscussions = event => {
