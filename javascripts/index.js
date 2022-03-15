@@ -75,7 +75,7 @@ const populateModal = event => {
   editButton.style.marginRight = '10px';
   button.addEventListener('click', deletePost);
   editButton.addEventListener('click', () => populateEditForm(post));
-  
+
   modalFooter().appendChild(editButton);
   modalFooter().appendChild(button);
 };
@@ -125,6 +125,42 @@ const loadhome = event => {
     mainDiv().appendChild(h1);
     mainDiv().appendChild(h3);
     mainDiv().appendChild(p);
+}
+
+const closeModal = () => {
+    var elem = document.querySelector('.modal');
+    var instance = M.Modal.getInstance(elem);
+    instance.close();
+  }
+
+const populateEditForm = (post) => {
+  resetMainDiv();
+  closeModal();
+  loadForm('Edit ' + post.title, updatepost, post)  
+}
+
+const updatepost = (post) => {
+    const jsonObject = {
+        username: formUserName().value,
+        title: formTitle().value,
+        tags: formTags().value,
+        text: formPostText().value
+    }
+
+    fetch(baseUrl + '/posts/' + post.id, {
+        method: "PATCH",
+        headers: {
+          "Accept": "application/json",
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(jsonObject)
+    })
+    .then(resp => resp.json())
+    .then(data => {
+        const index = posts.indexOf(post);
+        posts[index] = data;
+        loadDiscussions();
+    })
 }
 
 const loadCreatePost = event => {
