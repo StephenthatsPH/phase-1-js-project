@@ -14,6 +14,11 @@ const formUserName = () => document.getElementById('user-name');
 const formTitle = () => document.getElementById('title');
 const formTags = () => document.getElementById('tags');
 const formPostText = () => document.getElementById('postText');
+const postTitleModal = () =>document.getElementById('post-title-modal');
+const postUserNameModal = () =>document.getElementById('post-user-modal');
+const postTagsModal = () =>document.getElementById('post-tags-modal');
+const postTextModal = () =>document.getElementById('post-text-modal');
+const modalFooter = () => document.getElementById('modal-footer');
 
 /** Event Listeners **/
 const attachHomePageLinkEvent = () => {
@@ -70,13 +75,7 @@ const populateModal = event => {
 
 const sumbitForm = event => {
     event.preventDefault();
-//    {
-//        "username": "YaaBoiSpork",
-//        "title": "My first post!",
-//        "tags": "",
-//        "text": "This is my first post and the first for this site.",
-//        "id": 1
-//    }
+
     const jsonObject = {
         username: formUserName().value,
         title: formTitle().value,
@@ -197,7 +196,7 @@ const loadDiscussions = event => {
     
     posts.forEach( post => {
         const a = document.createElement('a');
-        a.setAttribute('href',"#modal1")
+        a.setAttribute('href', "#modal1")
         a.className = 'collection-item modal-trigger';
         a.innerText = post.title;
         a.addEventListener('click', populateModal);
