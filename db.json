@@ -1,25 +1,45 @@
 {
-    "users": [
-        {
-            "username": "YaaBoiSpork",
-            "password": "Justfortesting",
-            "email": "sanerby@outlook.com",
-            "id": 1
-        }
-    ],
-    "posts": [
-        {
-            "username": "YaaBoiSpork",
-            "title": "My first post!",
-            "tags": "",
-            "text": "This is my first post and the first for this site.",
-            "id": 1
-        }
-    ],
-    "videos": [
-        {
-            "url": "https://www.youtube.com/watch?v=tUm59wEVCWw"
-        }
-    ]
+  "users": [
+    {
+      "username": "YaaBoiSpork",
+      "password": "Justfortesting",
+      "email": "sanerby@outlook.com",
+      "id": 1
+    }
+  ],
+  "posts": [
+    {
+      "username": "Spork",
+      "title": "I'm new to this...",
+      "tags": "#new #Help?",
+      "text": "I'm new and eager to learn please help.\n",
+      "id": 3
+    },
+    {
+      "username": "Billy",
+      "title": "Check this out",
+      "tags": "#cool",
+      "text": "These videos are awesome which do you think is better?",
+      "id": 4
+    },
+    {
+      "username": "jkhji",
+      "title": "jhjkh",
+      "tags": "jgjkhgug",
+      "text": "huioguifub",
+      "id": 5
+    },
+    {
+      "username": "JitzPanda",
+      "title": "I'm a noob",
+      "tags": "#dogwater",
+      "text": "I'm the worst.",
+      "id": 6
+    }
+  ],
+  "videos": [
+    {
+      "url": "https://www.youtube.com/watch?v=tUm59wEVCWw"
+    }
+  ]
 }
-
