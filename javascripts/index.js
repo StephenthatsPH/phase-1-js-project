@@ -1,7 +1,6 @@
 /** Global Variables **/
 const baseUrl = 'http://localhost:3000';
 let posts = [];
-
 /** Node Getters **/
 const mainDiv = () => document.getElementById('main');
 const homeLink = () => document.getElementById('home-link');
@@ -19,26 +18,20 @@ const postUserNameModal = () =>document.getElementById('post-user-modal');
 const postTagsModal = () =>document.getElementById('post-tags-modal');
 const postTextModal = () =>document.getElementById('post-text-modal');
 const modalFooter = () => document.getElementById('modal-footer');
-
 /** Event Listeners **/
 const attachHomePageLinkEvent = () => {
     homeLink().addEventListener('click', loadhome );
 }
-
 const attachCreatePostLinkEvent = () => {
     createPostLink().addEventListener('click', loadCreatePost);
 }
-
 const attachDiscussionsLinkEvent = () => {
     discussionsLink().addEventListener('click', loadDiscussions);
 }
-
 const attachLoginLink = () => {
     loginLink().addEventListener('click',loadLogin);
 }
-
 /** Event Handlers **/
-
 const populateModal = event => {
     event.preventDefault();
     const post = posts.find(post => event.target.innerText === post.title)
@@ -46,7 +39,6 @@ const populateModal = event => {
     postUserNameModal().innerText = post.username;
     postTagsModal().innerText = post.tags;
     postTextModal().innerText = post.text;
-
     const deletePost = event => {
         // delete fetch
         fetch(baseUrl + '/posts/' + post.id, {
@@ -75,21 +67,19 @@ const populateModal = event => {
   editButton.style.marginRight = '10px';
   button.addEventListener('click', deletePost);
   editButton.addEventListener('click', () => populateEditForm(post));
+  
 
   modalFooter().appendChild(editButton);
   modalFooter().appendChild(button);
 };
-
 const sumbitForm = event => {
     event.preventDefault();
-
     const jsonObject = {
         username: formUserName().value,
         title: formTitle().value,
         tags: formTags().value,
         text: formPostText().value
     };
-
     fetch(baseUrl + '/posts', {
         method: "POST",
         headers: {
@@ -104,7 +94,6 @@ const sumbitForm = event => {
             loadDiscussions();
         });
 };
-
 const loadhome = event => {
     if(event) {
         event.preventDefault();
@@ -131,7 +120,7 @@ const closeModal = () => {
     var elem = document.querySelector('.modal');
     var instance = M.Modal.getInstance(elem);
     instance.close();
-}
+  }
 
 const populateEditForm = (post) => {
   resetMainDiv();
@@ -163,7 +152,9 @@ const updatepost = (post) => {
     })
 }
 
-const loadForm = (headerText, formCallback, post) => {
+const loadCreatePost = event => {
+    event.preventDefault();
+    resetMainDiv();
     const h1 = document.createElement('h1');
     h1.innerText = 'Create Post';
     const div = document.createElement('div');
@@ -195,19 +186,16 @@ const loadForm = (headerText, formCallback, post) => {
     input3.id = "tags";
     input3.name = "tags";
     input3.placeholder = "Enter Tags (Optional)";
+    const submit = document.createElement('input');
+    submit.type = 'submit';
+    submit.id = 'submit-form';
+    submit.innerText = 'Create Post';
     
     const textarea = document.createElement('textarea');
     textarea.name = "text";
     textarea.id = "postText";
     textarea.placeholder = "Enter Text";
     
-    const submit = document.createElement('input');
-    submit.type = 'submit';
-    submit.id = 'submit-form';
-    submit.innerText = 'Create Post';
-    if(post) {
-        submit.setAttribute('value', 'Update Post');
-      }
     
     
     form.appendChild(label1);
@@ -219,10 +207,7 @@ const loadForm = (headerText, formCallback, post) => {
     form.appendChild(label4);
     form.appendChild(textarea);
     form.appendChild(submit);
-    form.addEventListener('submit', event => {
-        event.preventDefault();
-        formCallback(post);
-    });
+    form.addEventListener('submit', sumbitForm);
     
     div.appendChild(form);
     
@@ -230,15 +215,6 @@ const loadForm = (headerText, formCallback, post) => {
     mainDiv().appendChild(div);
     
 }
-
-
-const loadCreatePost = event => {
-    event.preventDefault();
-    resetMainDiv();
-    
-    loadForm('Create Post', sumbitForm)
-}
-
 const loadDiscussions = event => {
     if(event) {
         event.preventDefault();
@@ -259,13 +235,10 @@ const loadDiscussions = event => {
         div.appendChild(a);
     });
     $('.modal').modal();
-
     mainDiv().appendChild(h1);
     mainDiv().appendChild(div);
     
 };
-
-
 const loadLogin = event => {
 event.preventDefault();
 resetMainDiv();
@@ -431,7 +404,6 @@ form2.appendChild(button2);
 form2.appendChild(p3);
 p3.appendChild(a3);
 };
-
 /** Requests **/
 const loadPosts = () => {
     fetch(baseUrl + '/posts')
@@ -440,18 +412,14 @@ const loadPosts = () => {
             posts = data;
         })
 };
-
 /** MISC **/
 const resetMainDiv = () => {
     mainDiv().innerHTML = '';
 };
-
 versusLink().addEventListener('click', function() {
     alert('Keep touching me and we will 1v1!');
 });
-
 /** Startup **/
-
 document.addEventListener('DOMContentLoaded', function(){
     loadPosts();
     loadhome();
@@ -460,12 +428,7 @@ document.addEventListener('DOMContentLoaded', function(){
     attachDiscussionsLinkEvent();
     attachLoginLink();
 });
-
-
-
-
 /** Fix this later vvvv **/ 
-
     
 //function setFormMessage(formElement, type, message) {
 //    const messageElement = formElement.querySelector(".form__message");
@@ -518,4 +481,3 @@ document.addEventListener('DOMContentLoaded', function(){
 //            clearInputError(inputElement);
 //        });
 //    });
-    
