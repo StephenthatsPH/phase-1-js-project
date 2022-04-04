@@ -1,5 +1,5 @@
 # Versus
-The idea behind Versus is to be a forum site where Users can pick 1 or more video(s) that an be posted for other to see and comment on. As just stated you will be able to open the site login/sign up, Create a post, view discussions, comment on posts, and upvote or down vote the posts, comments, and videos. 
+The idea behind Versus is to be a forum site where Users can pick 2 or more video(s) that an be posted for other to see and comment on. As just stated you will be able to open the site login/sign up, Create a post, view discussions, comment on posts, and upvote or down vote the posts, comments, and videos. 
 
 # Programs/packages needed
 1. Command Line Interface(Ubuntu, Command Promt, Powershell, etc.)
