@@ -1,13 +1,13 @@
 /** Global Variables **/
 const baseUrl = 'http://localhost:3000';
 let posts = [];
+
 /** Node Getters **/
 const mainDiv = () => document.getElementById('main');
 const homeLink = () => document.getElementById('home-link');
 const createPostLink = () => document.getElementById('create-post-link');
 const discussionsLink = () => document.getElementById('discussions-link');
 const loginLink = () => document.getElementById('login-link');
-const versusLink = () => document.getElementById('name-logo');
 const createAccountLink = () => document.getElementById('linkCreateAccount');
 const formUserName = () => document.getElementById('user-name');
 const formTitle = () => document.getElementById('title');
@@ -18,6 +18,7 @@ const postUserNameModal = () =>document.getElementById('post-user-modal');
 const postTagsModal = () =>document.getElementById('post-tags-modal');
 const postTextModal = () =>document.getElementById('post-text-modal');
 const modalFooter = () => document.getElementById('modal-footer');
+
 /** Event Listeners **/
 const attachHomePageLinkEvent = () => {
     homeLink().addEventListener('click', loadhome );
@@ -31,6 +32,7 @@ const attachDiscussionsLinkEvent = () => {
 const attachLoginLink = () => {
     loginLink().addEventListener('click',loadLogin);
 }
+
 /** Event Handlers **/
 const populateModal = event => {
     event.preventDefault();
@@ -404,6 +406,7 @@ form2.appendChild(button2);
 form2.appendChild(p3);
 p3.appendChild(a3);
 };
+
 /** Requests **/
 const loadPosts = () => {
     fetch(baseUrl + '/posts')
@@ -412,13 +415,12 @@ const loadPosts = () => {
             posts = data;
         })
 };
+
 /** MISC **/
 const resetMainDiv = () => {
     mainDiv().innerHTML = '';
 };
-versusLink().addEventListener('click', function() {
-    alert('Keep touching me and we will 1v1!');
-});
+
 /** Startup **/
 document.addEventListener('DOMContentLoaded', function(){
     loadPosts();
@@ -428,6 +430,15 @@ document.addEventListener('DOMContentLoaded', function(){
     attachDiscussionsLinkEvent();
     attachLoginLink();
 });
+
+
+
+
+
+
+
+
+
 /** Fix this later vvvv **/ 
     
 //function setFormMessage(formElement, type, message) {
