@@ -61,21 +61,27 @@ const populateModal = event => {
     }
     modalFooter.innerHTML = ''
     const button = document.createElement('button');
-  const editButton = document.createElement('button');
-  button.innerText = 'Delete'
-  editButton.innerText = 'Edit'
-  button.className = 'btn'
-  editButton.className="btn"
-  editButton.style.marginRight = '10px';
-  button.addEventListener('click', deletePost);
-  editButton.addEventListener('click', () => populateEditForm(post));
+    const editButton = document.createElement('button');
+    button.innerText = 'Delete'
+    editButton.innerText = 'Edit'
+    button.className = 'btn'
+    editButton.className="btn"
+    editButton.style.marginRight = '10px';
+    button.addEventListener('click', deletePost);
+    editButton.addEventListener('click', () => populateEditForm(post));
   
 
-  modalFooter().appendChild(editButton);
-  modalFooter().appendChild(button);
-};
+    modalFooter().appendChild(editButton);
+    modalFooter().appendChild(button);
+}
 const sumbitForm = event => {
     event.preventDefault();
+
+    if(formUserName().value.trim() === "" && formTitle().value.trim() === "" ){
+        alert('Requirements not met')
+        return false
+    }
+
     const jsonObject = {
         username: formUserName().value,
         title: formTitle().value,
@@ -176,13 +182,11 @@ const loadCreatePost = event => {
     input1.id = "user-name";
     input1.name = "UserName";
     input1.placeholder = "Username";
-    input1.required;
     const input2 = document.createElement('input');
     input2.type = "text";
     input2.id = "title";
     input2.name = "title";
     input2.placeholder = "Enter Title";
-    input2.required;
     const input3 = document.createElement('input');
     input3.type = "text";
     input3.id = "tags";
@@ -227,6 +231,20 @@ const loadDiscussions = event => {
     const div = document.createElement('div');
     div.className = 'collection';
     
+    const form = document.createElement('form');
+    const input1 = document.createElement('input');
+    const input2 = document.createElement('input');
+
+    input1.type = 'text';
+    input1.placeholder = 'Search by Title';
+
+    input2.type = 'submit';
+    input2.value = 'search';
+
+    form.appendChild(input1);
+    form.appendChild(input2);
+    form.addEventListener('submit')
+
     posts.forEach( post => {
         const a = document.createElement('a');
         a.setAttribute('href', "#modal1")
@@ -238,6 +256,7 @@ const loadDiscussions = event => {
     });
     $('.modal').modal();
     mainDiv().appendChild(h1);
+    // add form to main div
     mainDiv().appendChild(div);
     
 };
