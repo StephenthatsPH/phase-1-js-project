@@ -228,6 +228,8 @@ const loadDiscussions = event => {
     resetMainDiv();
     const h1 = document.createElement('h1');
     h1.innerText = 'Discussions';
+    const button = document.createElement('button');
+    button.innerText = 'Long Discussions';
     const div = document.createElement('div');
     div.className = 'collection';
     
@@ -235,17 +237,30 @@ const loadDiscussions = event => {
     const input1 = document.createElement('input');
     const input2 = document.createElement('input');
 
-    input1.type = 'text';
-    input1.placeholder = 'Search by Title';
+    renderPosts(div, posts);
+    $('.modal').modal();
+    mainDiv().appendChild(h1);
+    mainDiv().appendChild(button);
+    button.addEventListener('click', () => {
+        resetMainDiv();
 
-    input2.type = 'submit';
-    input2.value = 'search';
+        const h1 = document.createElement('h1');
+        h1.innerText = 'Discussions';
+        const div = document.createElement('div');
+        div.className = 'collection';
+        
+        let newArray = posts.filter(post => post.title.split(' ').length > 1)
+        renderPosts(div, newArray);
 
-    form.appendChild(input1);
-    form.appendChild(input2);
-    form.addEventListener('submit')
+        $('.modal').modal();
+        mainDiv().appendChild(h1);
+        mainDiv().appendChild(div);
+    });
+    mainDiv().appendChild(div);
+};
 
-    posts.forEach( post => {
+function renderPosts(div, displayPosts){
+    displayPosts.forEach( post => {
         const a = document.createElement('a');
         a.setAttribute('href', "#modal1")
         a.className = 'collection-item modal-trigger';
@@ -254,12 +269,8 @@ const loadDiscussions = event => {
         
         div.appendChild(a);
     });
-    $('.modal').modal();
-    mainDiv().appendChild(h1);
-    // add form to main div
-    mainDiv().appendChild(div);
-    
 };
+
 const loadLogin = event => {
 event.preventDefault();
 resetMainDiv();
